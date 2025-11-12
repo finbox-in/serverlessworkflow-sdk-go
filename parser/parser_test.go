@@ -23,8 +23,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/serverlessworkflow/sdk-go/v2/model"
-	"github.com/serverlessworkflow/sdk-go/v2/test"
+	"github.com/finbox-in/serverlessworkflow-sdk-go/model"
+	"github.com/finbox-in/serverlessworkflow-sdk-go/test"
 )
 
 func TestBasicValidation(t *testing.T) {
@@ -477,7 +477,7 @@ func TestFromFile(t *testing.T) {
 				assert.Equal(t, "CheckCreditCallback", w.States[8].GetName())
 				assert.Equal(t, model.StateType("callback"), w.States[8].GetType())
 				assert.Equal(t, "callCreditCheckMicroservice", w.States[8].(*model.CallbackState).Action.FunctionRef.RefName)
-				assert.Equal(t, map[string]model.Object{"argsObj": model.FromRaw(map[string]interface{}{"age": 10, "name": "hi"}), "customer": model.FromString("${ .customer }"), "time": model.FromInt(48)},
+				assert.Equal(t, map[string]model.Object{"argsObj": model.FromMap(map[string]interface{}{"age": 10, "name": "hi"}), "customer": model.FromString("${ .customer }"), "time": model.FromInt(48)},
 					w.States[8].(*model.CallbackState).Action.FunctionRef.Arguments)
 				assert.Equal(t, "PT10S", w.States[8].(*model.CallbackState).Action.Sleep.Before)
 				assert.Equal(t, "PT20S", w.States[8].(*model.CallbackState).Action.Sleep.After)
